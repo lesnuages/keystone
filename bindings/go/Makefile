@@ -2,6 +2,7 @@
 
 ifndef BUILDDIR
 OBJDIR = ./build
+CGO_LDFLAGS = "-lkeystone -lstdc++ -lm"
 else
 OBJDIR = $(abspath $(BUILDDIR))/obj/bindings/go
 endif
@@ -13,7 +14,7 @@ gen_const:
 	go fmt
 
 install:
-	cd keystone && go build
+	cd keystone && go build -a -ldflags '-s -w -extldflags "-static"'
 
 clean:
 
